@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>my_game_framework</title>
+
+  <link rel="stylesheet" href="https://szdxdxdx.github.io/my-vscode-markdown-css/my_markdown.css">
+</head>
+
+<body id="app">
+
+  <div style="margin: 0 auto;" v-html="markedToHtml"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script type="module">
+    import { createApp, ref, watch, nextTick } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js"
+
+    function setup() {
+      let markedToHtml = ref("")
+
+      fetch("https://szdxdxdx.github.io/my_game_framework/构思.md")
+        .then(res => res.text())
+        .then(text => {
+          markedToHtml.value = marked.parse(text)
+        })
+
+      watch(markedToHtml, () => nextTick(hljs.highlightAll))
+
+      return { markedToHtml }
+    }
+
+    createApp({ setup }).mount('#app')
+  </script>
+</body>
+
+</html>
