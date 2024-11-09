@@ -20,7 +20,7 @@
     function setup() {
       let markedToHtml = ref("")
 
-      fetch("https://szdxdxdx.github.io/my_game_framework/doc/构思.md")
+      fetch("https://szdxdxdx.github.io/my_game_framework/doc/细化题目.md")
         .then(res => res.text())
         .then(text => {
           markedToHtml.value = marked.parse(text)
